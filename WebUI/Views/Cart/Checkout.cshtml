@@ -1,0 +1,38 @@
+﻿@model Domain.Entities.ShippingDetails
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+
+
+
+
+
+<h2>Checkout</h2>
+@using (Html.BeginForm())
+{ 
+    @Html.ValidationSummary()
+
+<div> Nazwisko @Html.EditorFor(x=>x.Name)</div>
+
+<div> Wiersz 1: @Html.EditorFor(x=>x.Line1)</div>
+<div> Wiersz 2: @Html.EditorFor(x => x.Line2)</div>
+<div> Wiersz 3: @Html.EditorFor(x => x.Line3)</div>
+<div> Miasto: @Html.EditorFor(x => x.City)</div>
+<div> Wojewodzwtwo: @Html.EditorFor(x => x.State)</div>
+<div> Pocztowy: @Html.EditorFor(x => x.Zip)</div>
+<div> Kraj: @Html.EditorFor(x => x.Country)</div>
+
+<label>
+    @Html.EditorFor(x=>x.GiftWrap)
+    spakowac?
+
+</label>
+
+<p align="center">
+    <input class="actionButtons" type="submit" value="Zakoncz" />
+
+</p>
+
+}

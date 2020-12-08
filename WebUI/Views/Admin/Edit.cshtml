@@ -1,0 +1,37 @@
+﻿@model Domain.Entities.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h1>@Model.Name</h1>
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit" , "Admin", FormMethod.Post, new {enctype = "multipart/form-data" }))
+{
+@Html.EditorForModel()
+
+    <div class="editor-label">Zdjęcie</div>
+    <div class="editor-field">
+
+        @if (Model.ImageData == null)
+        {
+            @:Brak
+        }
+        else
+        { 
+            @Model.ImageData
+
+
+            <img width="800" height="600" src="@Url.Action("GetImage", "Product", new { productId = Model.ProductID })" />
+        }
+        <div>Przeslij nowe zdjecie: <input type="file" name="Image" />
+        </div>
+
+    </div>
+
+    <input type="submit" value="Zapisz" />
+    @Html.ActionLink("anuluj i wroc", "Index");
+}
+

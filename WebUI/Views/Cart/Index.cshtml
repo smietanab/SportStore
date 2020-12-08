@@ -1,0 +1,58 @@
+﻿@model WebUI.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "twoj koszyk";
+}
+
+<h2>twoj koszyk</h2>
+<table width="90%" align="center">
+    <thead>
+        <tr>
+            <th align="center">ilosc</th>
+            <th align="left">produkt</th>
+            <th align="right">cena</th>
+            <th align="right">wartosc</th>
+
+
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        { 
+        <tr>
+            <td align="center">@line.Quantity</td>
+            <td align="left">@line.Product.Price.ToString("c")</td>
+            <td align="right"> @((line.Quantity * line.Product.Price).ToString()))</td>
+
+            <td>
+                @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                {
+                    @Html.Hidden("ProductId", line.Product.ProductID)
+                    @Html.Hidden("returnUrl", @Model.ReturnUrl)
+                    <input class="actionButtons" type="submit" value="Usuń" />
+
+                }
+            </td>
+       </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" align="right">Razem</td>
+            <td align="right">
+                @Model.Cart.ComputeTotalValue().ToString()
+
+            </td>
+
+        </tr>
+
+    </tfoot>
+</table>
+<p align="center" class="actionButtons">
+    <a href="@Model.ReturnUrl">Kontynuuj zakupy</a>
+    @Html.ActionLink("zamowinie", "Checkout", "Cart")
+
+</p>
+
